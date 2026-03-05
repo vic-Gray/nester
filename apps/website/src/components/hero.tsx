@@ -62,17 +62,17 @@ export function Hero() {
                     transition={{ duration: 0.8, delay: 0.3, ease: "easeOut" }}
                     className="flex flex-col sm:flex-row items-center justify-center gap-3 md:gap-4 mt-2 md:mt-4"
                 >
-                    <div className="p-[3px] rounded-full border border-black/15 shadow-[0_2px_8px_rgba(0,0,0,0.12)] bg-white">
+                    <div className="p-[3px] rounded-full border border-black/15 shadow-xl bg-white">
                         <Button
-                            className="h-10 md:h-12 px-6 md:px-8 my-[0.15rem] mx-[0.15rem] bg-gradient-to-r from-[#0a0a0a] to-[#1a1a2e] border border-white/10 hover:from-[#1a1a2e] hover:to-[#0a0a0a] text-white transition-all rounded-full font-medium text-sm md:text-base"
+                            className="h-10 md:h-12 px-6 md:px-8 my-[0.1rem] mx-[0.1rem] bg-gradient-to-r from-[#0a0a0a] to-[#1a1a2e] border border-white/10 hover:from-[#1a1a2e] hover:to-[#0a0a0a] text-white transition-all rounded-full font-medium text-sm md:text-base"
                         >
                             Get Early Access
                             <ArrowRight className="ml-2 w-4 h-4" />
                         </Button>
                     </div>
-                    <div className="p-[3px] rounded-full border border-black/15 shadow-[0_2px_8px_rgba(0,0,0,0.12)] bg-white">
+                    <div className="p-[3px] rounded-full border border-black/15 shadow-xl bg-white">
                         <Button
-                            className="h-10 md:h-12 px-6 md:px-8 my-[0.15rem] mx-[0.15rem] bg-gradient-to-r from-[#0a0a0a] to-[#1a1a2e] border border-white/10 hover:from-[#1a1a2e] hover:to-[#0a0a0a] text-white transition-all rounded-full font-medium text-sm md:text-base"
+                            className="h-10 md:h-12 px-6 md:px-8 my-[0.1rem] mx-[0.1rem] bg-gradient-to-r from-[#0a0a0a] to-[#1a1a2e] border border-white/10 hover:from-[#1a1a2e] hover:to-[#0a0a0a] text-white transition-all rounded-full font-medium text-sm md:text-base"
                         >
                             Request a Demo
                             <ArrowRight className="ml-2 w-4 h-4" />

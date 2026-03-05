@@ -19,7 +19,7 @@ const track = [...carouselItems, ...carouselItems]
 
 export function ImageCarousel() {
     return (
-        <section className="relative w-full pt-4 pb-16 overflow-hidden">
+        <section className="relative w-full pt-3 pb-12 overflow-hidden">
             {/* Left smoke fade */}
             <div
                 className="pointer-events-none absolute left-0 top-0 h-full w-16 sm:w-24 md:w-40 lg:w-48 z-10"
@@ -36,10 +36,10 @@ export function ImageCarousel() {
                 {track.map((item, i) => (
                     <div
                         key={i}
-                        className="flex-shrink-0 w-44 h-60 sm:w-52 sm:h-72 md:w-60 md:h-80 lg:w-72 lg:h-96 rounded-2xl lg:rounded-3xl overflow-hidden flex items-center justify-center shadow-sm"
+                        className="flex-shrink-0 w-36 h-48 sm:w-44 sm:h-60 md:w-52 md:h-68 lg:w-60 lg:h-80 rounded-2xl lg:rounded-3xl overflow-hidden flex items-center justify-center shadow-sm"
                         style={{ backgroundColor: item.bg }}
                     >
-                        <div className="relative w-28 h-28 sm:w-36 sm:h-36 md:w-44 md:h-44 lg:w-52 lg:h-52">
+                        <div className="relative w-22 h-22 sm:w-28 sm:h-28 md:w-36 md:h-36 lg:w-44 lg:h-44">
                             <Image
                                 src={item.src}
                                 alt={item.alt}

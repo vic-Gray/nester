@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Space_Grotesk, Inter, Cormorant } from "next/font/google";
 import { CookieConsent } from "@/components/cookie-consent";
+import { SmoothScroll } from "@/components/smooth-scroll";
 import "./globals.css";
 
 const spaceGrotesk = Space_Grotesk({ subsets: ["latin"], variable: "--font-space-grotesk" });
@@ -28,8 +29,10 @@ export default function RootLayout({
         suppressHydrationWarning
         className={`${spaceGrotesk.variable} ${inter.variable} ${cormorant.variable} antialiased bg-background text-foreground selection:bg-primary selection:text-primary-foreground font-sans`}
       >
-        {children}
-        <CookieConsent />
+        <SmoothScroll>
+          {children}
+          <CookieConsent />
+        </SmoothScroll>
       </body>
     </html>
   );

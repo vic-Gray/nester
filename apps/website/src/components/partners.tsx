@@ -1,5 +1,8 @@
 "use client"
 
+// import { Import } from "lucide-react"
+import Image from "next/image"
+
 const partners = [
     { name: "MoneyGram", logo: "/logos/moneygram.svg" },
     { name: "Circle", logo: "/logos/circle.svg" },
@@ -13,16 +16,16 @@ const partners = [
 
 export function Partners() {
     return (
-        <section className="w-full py-4 overflow-hidden bg-white border-b border-gray-100 relative">
-            <div className="relative z-10 flex w-full">
+        <section className="w-full py-2 overflow-hidden bg-white border-b border-gray-100 relative">
+           <div className="relative z-10 flex w-full">
                 <div className="flex animate-marquee whitespace-nowrap items-center">
                     {partners.map((partner, i) => (
-                        <div key={i} className="mx-12 md:mx-24 flex items-center justify-center grayscale hover:grayscale-0 transition-all duration-300 opacity-70 hover:opacity-100">
-                            <img
+                        <div key={i} className="mx-6 md:mx-12 flex items-center justify-center grayscale hover:grayscale-0 transition-all duration-300 opacity-70 hover:opacity-100">
+                            <Image
                                 src={partner.logo}
                                 alt={partner.name}
-                                className="h-10 md:h-14 w-auto"
-                                style={{ minWidth: "80px", maxWidth: "160px" }}
+                                className="h-5 md:h-6 w-auto"
+                                style={{ minWidth: "48px", maxWidth: "96px" }}
                             />
                         </div>
                     ))}
@@ -30,12 +33,12 @@ export function Partners() {
                 {/* Duplicate for seamless scrolling */}
                 <div className="flex absolute top-0 animate-marquee2 whitespace-nowrap items-center">
                     {partners.map((partner, i) => (
-                        <div key={`dup-${i}`} className="mx-12 md:mx-24 flex items-center justify-center grayscale hover:grayscale-0 transition-all duration-300 opacity-70 hover:opacity-100">
-                            <img
+                        <div key={`dup-${i}`} className="mx-6 md:mx-12 flex items-center justify-center grayscale hover:grayscale-0 transition-all duration-300 opacity-70 hover:opacity-100">
+                            <Image
                                 src={partner.logo}
                                 alt={partner.name}
-                                className="h-10 md:h-14 w-auto"
-                                style={{ minWidth: "80px", maxWidth: "160px" }}
+                                className="h-5 md:h-6 w-auto"
+                                style={{ minWidth: "48px", maxWidth: "96px" }}
                             />
                         </div>
                     ))}
