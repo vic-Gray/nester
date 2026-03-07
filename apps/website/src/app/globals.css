@@ -102,3 +102,93 @@
 .scrollbar-hide::-webkit-scrollbar {
   display: none;
 }
+
+/* Animated gradient border — thin border with bright traveling raindrop */
+@property --border-angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+
+@keyframes border-rotate {
+  0%   { --border-angle: 0deg; }
+  100% { --border-angle: 360deg; }
+}
+
+.gradient-border-active {
+  position: relative;
+  border-color: transparent !important;
+}
+
+/* Thin gradient border */
+.gradient-border-active::before {
+  content: "";
+  position: absolute;
+  inset: -1.5px;
+  border-radius: inherit;
+  padding: 1.5px;
+  background: conic-gradient(
+    from var(--border-angle),
+    #6025f5, #111111, #ff5555, #111111, #facc15, #111111, #6025f5
+  );
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+  animation: border-rotate 3s linear infinite;
+}
+
+/* Bright raindrop glow that circles — sits centered on the border line */
+.gradient-border-active::after {
+  content: "";
+  position: absolute;
+  inset: -4px;
+  border-radius: inherit;
+  padding: 8px;
+  background: conic-gradient(
+    from var(--border-angle),
+    #6025f5 0deg,
+    #ff5555 15deg,
+    #facc15 30deg,
+    transparent 50deg,
+    transparent 330deg,
+    #6025f5 360deg
+  );
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+  filter: blur(6px);
+  opacity: 1;
+  animation: border-rotate 6s linear infinite;
+  z-index: 0;
+}
+
+.gradient-border-active > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* AI layer — smaller glow for compact cards */
+.gradient-border-sm::after {
+  inset: -2px !important;
+  padding: 5px !important;
+  filter: blur(4px) !important;
+}
+
+/* FAQ — larger glow for wide accordion items */
+.gradient-border-lg::after {
+  inset: -6px !important;
+  padding: 12px !important;
+  filter: blur(10px) !important;
+}
+
+/* Ecosystem staircase padding — only on md+ where staircase is visible */
+.ecosystem-text-panel {
+  padding-top: 3rem;
+}
+@media (min-width: 768px) {
+  .ecosystem-text-panel {
+    padding-top: calc(272px + 3rem);
+  }
+}
