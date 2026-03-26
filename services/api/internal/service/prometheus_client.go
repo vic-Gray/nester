@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"net/http"
+	"net/url"
 	"sync"
 	"time"
 
@@ -57,15 +58,15 @@ func (c *PrometheusClient) GetVaultRecommendations(ctx context.Context, vaultID 
 	}
 
 	if !c.canCall() {
-		return []intelligence.Recommendation{}, nil // Graceful degradation
+		return nil, fmt.Errorf("prometheus service unavailable (circuit open)")
 	}
 
-	url := fmt.Sprintf("%s/api/v1/vaults/%s/recommendations", c.cfg.BaseURL, vaultID)
+	url := fmt.Sprintf("%s/api/v1/vaults/%s/recommendations", c.cfg.BaseURL, url.PathEscape(vaultID))
 	var recs []intelligence.Recommendation
 	err := c.doRequest(ctx, url, &recs)
 	if err != nil {
 		c.recordFailure()
-		return []intelligence.Recommendation{}, nil // Graceful degradation
+		return nil, fmt.Errorf("failed to get vault recommendations: %w", err)
 	}
 
 	c.setCache(key, recs, VaultCacheTTL)
@@ -79,7 +80,7 @@ func (c *PrometheusClient) GetMarketSentiment(ctx context.Context) (*intelligenc
 	}
 
 	if !c.canCall() {
-		return &intelligence.SentimentReport{}, nil
+		return nil, fmt.Errorf("prometheus service unavailable (circuit open)")
 	}
 
 	url := fmt.Sprintf("%s/api/v1/intelligence/market", c.cfg.BaseURL)
@@ -87,7 +88,7 @@ func (c *PrometheusClient) GetMarketSentiment(ctx context.Context) (*intelligenc
 	err := c.doRequest(ctx, url, &report)
 	if err != nil {
 		c.recordFailure()
-		return &intelligence.SentimentReport{}, nil
+		return nil, fmt.Errorf("failed to get market sentiment: %w", err)
 	}
 
 	c.setCache(key, &report, MarketCacheTTL)
@@ -101,15 +102,15 @@ func (c *PrometheusClient) GetPortfolioInsights(ctx context.Context, userID stri
 	}
 
 	if !c.canCall() {
-		return &intelligence.PortfolioInsights{}, nil
+		return nil, fmt.Errorf("prometheus service unavailable (circuit open)")
 	}
 
-	url := fmt.Sprintf("%s/api/v1/users/%s/insights", c.cfg.BaseURL, userID)
+	url := fmt.Sprintf("%s/api/v1/users/%s/insights", c.cfg.BaseURL, url.PathEscape(userID))
 	var insights intelligence.PortfolioInsights
 	err := c.doRequest(ctx, url, &insights)
 	if err != nil {
 		c.recordFailure()
-		return &intelligence.PortfolioInsights{}, nil
+		return nil, fmt.Errorf("failed to get portfolio insights: %w", err)
 	}
 
 	c.setCache(key, &insights, PortfolioCacheTTL)
