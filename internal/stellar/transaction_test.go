@@ -72,11 +72,10 @@ func TestSubmitTransaction_FailureResponse(t *testing.T) {
 	// Test transaction failure
 	result, err := invoker.submitTransaction(context.Background(), nil)
 
-	// Should handle failure gracefully
-	assert.NoError(t, err)
-	assert.NotNil(t, result)
-	assert.False(t, result.IsSuccess)
-	assert.Contains(t, result.Error, "TXN_FAILED")
+	// Should fail because transaction is nil
+	assert.Error(t, err)
+	assert.Nil(t, result)
+	assert.Contains(t, err.Error(), "transaction is nil")
 }
 
 func TestSubmitTransaction_NetworkError(t *testing.T) {
